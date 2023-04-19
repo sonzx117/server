@@ -1,17 +1,19 @@
 import db from "../models";
 
-//Get all category
-
-export const getCategoriesService = () =>
+// GET CURRENT
+export const getOne = (id) =>
   new Promise(async (resolve, reject) => {
     try {
-      const response = await db.Category.findAll({
+      const response = await db.User.findOne({
+        where: { id },
         raw: true,
+        attributes: {
+          exclude: ["password"],
+        },
       });
-
       resolve({
         err: response ? 0 : 1,
-        msg: response ? "Oke" : "Fail to get Categories.",
+        msg: response ? "OK" : "Failed to get provinces.",
         response,
       });
     } catch (error) {
